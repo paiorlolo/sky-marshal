@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0q84vl3tvhtv"]
+
+[ext_resource type="Script" path="res://scenes/Behaviors/Movement/Movement_Scripts/movement_basic.gd" id="1_dwg8f"]
+
+[node name="Basic_Movement" type="Node2D"]
+script = ExtResource("1_dwg8f")

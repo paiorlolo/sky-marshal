@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8oly8cxllurb"]
+
+[ext_resource type="Script" path="res://scripts/player_bullet.gd" id="1_l2c62"]
+[ext_resource type="Texture2D" uid="uid://dube8vpny8vd5" path="res://assets/airplane/laserGreen11.png" id="2_bojwu"]
+[ext_resource type="AudioStream" uid="uid://csn20uewubqqn" path="res://assets/sfx/airplane_shoot.ogg" id="3_wdt0q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1lkvs"]
+size = Vector2(55, 10)
+
+[node name="PlayerBullet" type="Area2D"]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_l2c62")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_bojwu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_1lkvs")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-1.90735e-06, 4.76837e-07)
+scale = Vector2(2.8, 0.6)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_wdt0q")
+autoplay = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

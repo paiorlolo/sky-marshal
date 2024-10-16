@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsexskgkvgym1"]
+
+[ext_resource type="Script" path="res://scripts/enemies/enemy_up_and_down.gd" id="1_jtn2l"]
+[ext_resource type="Texture2D" uid="uid://ixs75hru8un6" path="res://assets/enemigos/up_and_down.png" id="2_2eh54"]
+
+[node name="UpAndDownEnemy" type="Area2D"]
+collision_layer = 2
+collision_mask = 9
+script = ExtResource("1_jtn2l")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-1, -105, 104, 103, 130, 123, 130, 136, -128, 136, -128, 124, -101, 103, -86, 72, -63, -3, -23, -60)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_2eh54")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." groups=["enemies"]]
+position = Vector2(1.5, 1)
+scale = Vector2(13.35, 14.1)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 15
+one_shot = true
+explosiveness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(15, 15)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 500.0
+scale_amount_min = 1.9
+scale_amount_max = 41.03
+color = Color(0.905882, 0.654902, 0.301961, 1)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

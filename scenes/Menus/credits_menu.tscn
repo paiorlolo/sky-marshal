@@ -1,0 +1,125 @@
+[gd_scene load_steps=5 format=3 uid="uid://blousr1cr3ajk"]
+
+[ext_resource type="Theme" uid="uid://cehwwyyuxm3u1" path="res://assets/theme/game_theme.tres" id="1_dfkq2"]
+[ext_resource type="Script" path="res://scripts/credits_menu.gd" id="2_7mfj3"]
+[ext_resource type="Texture2D" uid="uid://q0bm8m5pur0h" path="res://assets/background/sky.png" id="3_u62sx"]
+[ext_resource type="FontFile" uid="uid://bdjf3eln4j6lo" path="res://assets/theme/Air Planet.ttf" id="4_cr6al"]
+
+[node name="CreditsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_dfkq2")
+script = ExtResource("2_7mfj3")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0.603721, 0.525357, 0.506554, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.5
+offset_top = -252.0
+offset_right = 450.5
+offset_bottom = 252.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_u62sx")
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.5
+offset_top = -177.0
+offset_right = 320.5
+offset_bottom = 177.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("4_cr6al")
+theme_override_font_sizes/font_size = 65
+text = "SKY MARSHAL"
+horizontal_alignment = 1
+
+[node name="DesignProgArt" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="MasterLabel" type="Label" parent="VBoxContainer/DesignProgArt"]
+layout_mode = 2
+text = "Design, Programming, Art"
+
+[node name="MasterLabel2" type="Label" parent="VBoxContainer/DesignProgArt"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "RODRIGO NEIRA"
+
+[node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="SFXMusic" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="SFXLabel" type="Label" parent="VBoxContainer/SFXMusic"]
+layout_mode = 2
+theme = ExtResource("1_dfkq2")
+text = "SFX & MUSIC"
+
+[node name="SFXLabel2" type="Label" parent="VBoxContainer/SFXMusic"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme = ExtResource("1_dfkq2")
+text = "OPENGAMEART.ORG, KENNEY"
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="Others" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="MusicLabel" type="Label" parent="VBoxContainer/Others"]
+layout_mode = 2
+text = "OTHER GAME ART"
+
+[node name="MusicLabel2" type="Label" parent="VBoxContainer/Others"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "KENNEY, OPENGAMEART.ORG, META AI"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="Back" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "BACK"
+
+[connection signal="mouse_entered" from="VBoxContainer/Back" to="." method="_on_back_mouse_entered"]
+[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]

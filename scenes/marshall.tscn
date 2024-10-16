@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://bpi3q3wxqe65q"]
+
+[ext_resource type="Texture2D" uid="uid://dmudto2ekvwq8" path="res://assets/marshall/cuerpo.png" id="1_6n03f"]
+[ext_resource type="Texture2D" uid="uid://ckogmugtlhvm2" path="res://assets/marshall/brazo.png" id="2_6d0pf"]
+[ext_resource type="Script" path="res://scripts/marshall.gd" id="2_w7oh1"]
+[ext_resource type="PackedScene" uid="uid://ruihp4gp6bab" path="res://scenes/lantern.tscn" id="3_liuej"]
+
+[node name="marshall" type="Sprite2D"]
+texture = ExtResource("1_6n03f")
+script = ExtResource("2_w7oh1")
+
+[node name="brazo_izq" type="Sprite2D" parent="."]
+position = Vector2(-24, -77)
+rotation = -2.41632
+scale = Vector2(-1, 1)
+texture = ExtResource("2_6d0pf")
+offset = Vector2(8.32239, -47.9066)
+
+[node name="linterna" parent="brazo_izq" instance=ExtResource("3_liuej")]
+z_index = 1
+position = Vector2(19.143, -81.3237)
+rotation = -9.28838
+
+[node name="brazo_der" type="Sprite2D" parent="."]
+position = Vector2(23, -76)
+rotation = 2.37636
+texture = ExtResource("2_6d0pf")
+offset = Vector2(8.32239, -47.9066)
+
+[node name="linterna" parent="brazo_der" instance=ExtResource("3_liuej")]
+z_index = 1
+position = Vector2(19.1349, -81.1348)
+rotation = -6.13483

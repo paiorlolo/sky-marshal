@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EnemyResource" load_steps=2 format=3 uid="uid://ctsd1jag8d553"]
+
+[ext_resource type="Script" path="res://scripts/enemies/enemy_resource.gd" id="1_sj2ia"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_sj2ia")
+health = 1
+speed = 40
+movement_type = 1

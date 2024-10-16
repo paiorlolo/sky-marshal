@@ -1,0 +1,133 @@
+[gd_scene load_steps=14 format=3 uid="uid://bp7jmd28uh1pj"]
+
+[ext_resource type="Texture2D" uid="uid://q0bm8m5pur0h" path="res://assets/background/sky.png" id="1_8fh87"]
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_q8b6b"]
+[ext_resource type="PackedScene" uid="uid://bpi3q3wxqe65q" path="res://scenes/marshall.tscn" id="1_rexc3"]
+[ext_resource type="PackedScene" uid="uid://cc83bodmrs23w" path="res://scenes/Enemies/enemy_basic.tscn" id="3_men4v"]
+[ext_resource type="PackedScene" uid="uid://bsexskgkvgym1" path="res://scenes/Enemies/enemy_up_and_down.tscn" id="4_a54gp"]
+[ext_resource type="PackedScene" uid="uid://8iyffuf70wfn" path="res://scenes/Enemies/enemy_dreadnought.tscn" id="4_l5bl7"]
+[ext_resource type="PackedScene" uid="uid://ccjaaju7icypb" path="res://scenes/Enemies/enemy_fast.tscn" id="5_rxolj"]
+[ext_resource type="PackedScene" uid="uid://dr4m8snnunohw" path="res://scenes/Menus/pause_menu.tscn" id="6_361nc"]
+[ext_resource type="PackedScene" uid="uid://blevr4npb7jya" path="res://scenes/airplane.tscn" id="7_gvxii"]
+[ext_resource type="PackedScene" uid="uid://b8oly8cxllurb" path="res://scenes/player_bullet.tscn" id="9_esvqg"]
+[ext_resource type="AudioStream" uid="uid://cfd6afvrmckwl" path="res://assets/music/flyingv.mp3" id="9_n38m8"]
+[ext_resource type="PackedScene" uid="uid://8qkskt1u6msb" path="res://scenes/supplies.tscn" id="10_8qtmp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_863md"]
+size = Vector2(1162, 188)
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_q8b6b")
+enemies_in_level = Array[PackedScene]([ExtResource("4_a54gp"), ExtResource("3_men4v"), ExtResource("4_l5bl7"), ExtResource("5_rxolj")])
+
+[node name="marshall" parent="." instance=ExtResource("1_rexc3")]
+z_index = 5
+position = Vector2(576, 585)
+
+[node name="CloudSpawnTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="EnemiesSpawnTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Airplane" parent="." instance=ExtResource("7_gvxii")]
+z_index = 5
+position = Vector2(206, 133)
+movement_speed = 35.0
+glide_speed = 30.0
+bullet_scene = ExtResource("9_esvqg")
+supplies_scene = ExtResource("10_8qtmp")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_n38m8")
+autoplay = true
+bus = &"music"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="UI" type="Control" parent="CanvasLayer"]
+show_behind_parent = true
+z_index = -100
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="background" type="TextureRect" parent="CanvasLayer/UI"]
+modulate = Color(0.401624, 0.416985, 0.433194, 1)
+z_index = -100
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_8fh87")
+expand_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="lbl_current_supplies" type="Label" parent="CanvasLayer/UI"]
+top_level = true
+z_index = 30
+z_as_relative = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -10.0
+offset_bottom = 23.0
+grow_horizontal = 0
+rotation = 0.00217084
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UI"]
+top_level = true
+z_index = 30
+z_as_relative = false
+layout_mode = 1
+offset_right = 274.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="CanvasLayer/UI/HBoxContainer"]
+z_index = 30
+z_as_relative = false
+layout_mode = 2
+text = "HEALTH: "
+
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer/UI/HBoxContainer"]
+modulate = Color(0.347218, 0.86, 0.241423, 1)
+z_index = 30
+z_as_relative = false
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 3.0
+step = 1.0
+value = 3.0
+show_percentage = false
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer2" instance=ExtResource("6_361nc")]
+visible = false
+top_level = true
+z_index = 50
+z_as_relative = false
+size_flags_vertical = 4
+
+[node name="Sea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sea"]
+position = Vector2(575, 742)
+shape = SubResource("RectangleShape2D_863md")
+
+[connection signal="change_order" from="marshall" to="Airplane" method="_on_marshall_change_order"]
+[connection signal="drop_supplies" from="marshall" to="Airplane" method="_on_marshall_drop_supplies"]
+[connection signal="shoot" from="marshall" to="Airplane" method="_on_marshall_shoot"]
+[connection signal="timeout" from="CloudSpawnTimer" to="." method="_on_cloud_spawn_timer_timeout"]
+[connection signal="timeout" from="EnemiesSpawnTimer" to="." method="_on_enemies_spawn_timer_timeout"]
+[connection signal="area_entered" from="Sea" to="Airplane" method="_on_sea_area_entered"]

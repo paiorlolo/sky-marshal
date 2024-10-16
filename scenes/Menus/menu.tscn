@@ -1,0 +1,123 @@
+[gd_scene load_steps=11 format=3 uid="uid://d0wrq2bb0115l"]
+
+[ext_resource type="Theme" uid="uid://cehwwyyuxm3u1" path="res://assets/theme/game_theme.tres" id="1_7wnm1"]
+[ext_resource type="Script" path="res://scripts/menu.gd" id="2_jht76"]
+[ext_resource type="Texture2D" uid="uid://coa1tf4jmnycq" path="res://assets/background/main_background.jpg" id="3_nmvjs"]
+[ext_resource type="Texture2D" uid="uid://5ffhuqvvqc7t" path="res://assets/theme/red_button_rectangle_depth_gradient.png" id="3_uh027"]
+[ext_resource type="Texture2D" uid="uid://blg1tpdom2a0y" path="res://assets/theme/red_button_rectangle_flat.png" id="4_3137n"]
+[ext_resource type="FontFile" uid="uid://bdjf3eln4j6lo" path="res://assets/theme/Air Planet.ttf" id="4_pntck"]
+[ext_resource type="Texture2D" uid="uid://c2f37xgmirgoa" path="res://assets/theme/red_button_rectangle_depth_flat.png" id="5_hap7m"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ebhb0"]
+texture = ExtResource("3_uh027")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8yo86"]
+texture = ExtResource("4_3137n")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0mcem"]
+texture = ExtResource("5_hap7m")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+size_flags_horizontal = 4
+theme = ExtResource("1_7wnm1")
+script = ExtResource("2_jht76")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0.672939, 0.606843, 0.588679, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -290.0
+offset_top = -290.0
+offset_right = 290.0
+offset_bottom = 290.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_nmvjs")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -147.5
+offset_top = -99.5
+offset_right = 147.5
+offset_bottom = 99.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("4_pntck")
+theme_override_font_sizes/font_size = 65
+text = "SKY MARSHAL"
+horizontal_alignment = 1
+
+[node name="Play" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "FLY!"
+
+[node name="Options" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "OPTIONS"
+
+[node name="Credits" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "CREDITS"
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/hover = SubResource("StyleBoxTexture_ebhb0")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_8yo86")
+theme_override_styles/normal = SubResource("StyleBoxTexture_0mcem")
+text = "QUIT"
+
+[connection signal="mouse_entered" from="VBoxContainer/Play" to="." method="_on_play_mouse_entered"]
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/Options" to="." method="_on_options_mouse_entered"]
+[connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/Credits" to="." method="_on_credits_mouse_entered"]
+[connection signal="pressed" from="VBoxContainer/Credits" to="." method="_on_credits_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/Quit" to="." method="_on_quit_mouse_entered"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

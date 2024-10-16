@@ -1,0 +1,132 @@
+[gd_scene load_steps=7 format=3 uid="uid://cexg7kr3dfp3t"]
+
+[ext_resource type="Script" path="res://scripts/options_menu.gd" id="1_5vetd"]
+[ext_resource type="Theme" uid="uid://cehwwyyuxm3u1" path="res://assets/theme/game_theme.tres" id="1_inf7g"]
+[ext_resource type="Texture2D" uid="uid://de7ycmgjk6hut" path="res://assets/ui/keyboard.png" id="3_2wkhv"]
+[ext_resource type="Texture2D" uid="uid://q0bm8m5pur0h" path="res://assets/background/sky.png" id="3_jrd5v"]
+[ext_resource type="ButtonGroup" uid="uid://bhx7jdqejo8pq" path="res://assets/ui/input_button_group.tres" id="4_frk8k"]
+[ext_resource type="Texture2D" uid="uid://b5bkewjjqw1of" path="res://assets/ui/gamepad.png" id="4_vi2xt"]
+
+[node name="OptionsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_inf7g")
+script = ExtResource("1_5vetd")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0.603721, 0.525357, 0.506554, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -640.0
+offset_top = -640.0
+offset_right = 640.0
+offset_bottom = 640.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_jrd5v")
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = -258.0
+offset_top = -225.0
+offset_right = 258.0
+offset_bottom = 225.0
+
+[node name="Master" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="MasterLabel" type="Label" parent="VBoxContainer/Master"]
+layout_mode = 2
+text = "Master Volume"
+
+[node name="MasterSlider" type="HSlider" parent="VBoxContainer/Master"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+max_value = 1.0
+step = 0.001
+
+[node name="SFX" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="SFXLabel" type="Label" parent="VBoxContainer/SFX"]
+layout_mode = 2
+theme = ExtResource("1_inf7g")
+text = "SFX Volume"
+
+[node name="SFXSlider" type="HSlider" parent="VBoxContainer/SFX"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+max_value = 1.0
+step = 0.001
+
+[node name="Music" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="MusicLabel" type="Label" parent="VBoxContainer/Music"]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="MusicSlider" type="HSlider" parent="VBoxContainer/Music"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+max_value = 1.0
+step = 0.001
+
+[node name="Input" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="KeyboardVBoxContainer" type="VBoxContainer" parent="VBoxContainer/Input"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Input/KeyboardVBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_2wkhv")
+
+[node name="KeyboardCheckButton" type="CheckButton" parent="VBoxContainer/Input/KeyboardVBoxContainer"]
+layout_mode = 2
+button_pressed = true
+button_group = ExtResource("4_frk8k")
+text = "KEYBOARD"
+
+[node name="GamepadVBoxContainer" type="VBoxContainer" parent="VBoxContainer/Input"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Input/GamepadVBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_vi2xt")
+
+[node name="GamepadCheckButton" type="CheckButton" parent="VBoxContainer/Input/GamepadVBoxContainer"]
+layout_mode = 2
+button_group = ExtResource("4_frk8k")
+text = "GAMEPAD"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Back" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "BACK"
+
+[connection signal="value_changed" from="VBoxContainer/Master/MasterSlider" to="." method="_on_master_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/SFX/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/Music/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="pressed" from="VBoxContainer/Input/KeyboardVBoxContainer/KeyboardCheckButton" to="." method="_on_keyboard_check_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Input/GamepadVBoxContainer/GamepadCheckButton" to="." method="_on_gamepad_check_button_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/Back" to="." method="_on_back_mouse_entered"]
+[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]

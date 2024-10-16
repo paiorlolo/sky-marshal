@@ -1,0 +1,41 @@
+[gd_scene load_steps=9 format=3 uid="uid://bm8yelpgb1uik"]
+
+[ext_resource type="Script" path="res://scripts/global.gd" id="1_uju7k"]
+[ext_resource type="AudioStream" uid="uid://bwqooucxvb6md" path="res://assets/sfx/button_pressed_change_scene.ogg" id="2_0syan"]
+[ext_resource type="AudioStream" uid="uid://63bfjdixwkyl" path="res://assets/sfx/button_hover.ogg" id="3_ngsmf"]
+[ext_resource type="AudioStream" uid="uid://6flctx67qri2" path="res://assets/sfx/game_start.ogg" id="4_i1rsg"]
+[ext_resource type="AudioStream" uid="uid://44ahf1wq8kk2" path="res://assets/sfx/enemy_take_damage.ogg" id="5_xn5b2"]
+[ext_resource type="AudioStream" uid="uid://c03dakb1w07e" path="res://assets/sfx/enemy_explode.wav" id="6_qunmx"]
+[ext_resource type="AudioStream" uid="uid://bfqsjknlysitj" path="res://assets/sfx/goal_reached.ogg" id="6_uw0ht"]
+[ext_resource type="AudioStream" uid="uid://bmbjmnc6fb17x" path="res://assets/sfx/game_over.ogg" id="7_1iohq"]
+
+[node name="Global" type="Node2D"]
+script = ExtResource("1_uju7k")
+
+[node name="sfx_button_change_scene" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_0syan")
+bus = &"sfx"
+
+[node name="sfx_button_hover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ngsmf")
+bus = &"sfx"
+
+[node name="sfx_game_start" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_i1rsg")
+bus = &"sfx"
+
+[node name="sfx_enemy_take_damage" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_xn5b2")
+bus = &"sfx"
+
+[node name="sfx_enemy_explode" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_qunmx")
+bus = &"sfx"
+
+[node name="sfx_game_won" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_uw0ht")
+bus = &"sfx"
+
+[node name="sfx_game_over" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_1iohq")
+bus = &"sfx"

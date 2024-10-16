@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnqvknrto7qne"]
+
+[ext_resource type="Script" path="res://scenes/Behaviors/Movement/Movement_Scripts/movement_fast.gd" id="1_n7tmr"]
+[ext_resource type="AudioStream" uid="uid://ctaongr5d8x1k" path="res://assets/sfx/enemy_fast.ogg" id="2_wfmq8"]
+
+[node name="Fast_Movement" type="Node2D"]
+script = ExtResource("1_n7tmr")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_wfmq8")
+bus = &"sfx"

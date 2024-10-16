@@ -1,0 +1,124 @@
+[gd_scene load_steps=8 format=3 uid="uid://dlbsl1eg4dfap"]
+
+[ext_resource type="Script" path="res://scripts/island.gd" id="1_iv8si"]
+[ext_resource type="Texture2D" uid="uid://cm6vv4s51pm8w" path="res://assets/island/emote_heart.png" id="2_14hgw"]
+[ext_resource type="Texture2D" uid="uid://cpxs3dceal8xk" path="res://assets/island/island_2.png" id="2_p4ctv"]
+[ext_resource type="AudioStream" uid="uid://cp2droogxdyhx" path="res://assets/sfx/box_delivered.ogg" id="4_d02ww"]
+
+[sub_resource type="Animation" id="Animation_7kctr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("Emotion:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [],
+"times": PackedFloat32Array()
+}
+tracks/1/use_blend = true
+
+[sub_resource type="Animation" id="Animation_0rwac"]
+resource_name = "delivered"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Emotion:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_d02ww")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n8v1t"]
+_data = {
+"RESET": SubResource("Animation_7kctr"),
+"delivered": SubResource("Animation_0rwac")
+}
+
+[node name="Island" type="Area2D" groups=["island"]]
+z_index = -2
+scale = Vector2(0.2, 0.2)
+collision_layer = 4
+collision_mask = 16
+script = ExtResource("1_iv8si")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-220, -65)
+polygon = PackedVector2Array(-20, -190, -10, -320, -50, -345, 20, -415, 15, -495, 130, -495, 130, -445, 265, -450, 375, -345, 340, -325, 355, -200, 160, -175)
+
+[node name="Sprite" type="TextureRect" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -545.5
+offset_top = -732.0
+offset_right = 545.5
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_p4ctv")
+
+[node name="Emotion" type="TextureRect" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -260.0
+offset_top = -805.0
+offset_right = -35.0
+offset_bottom = -580.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(110, 225)
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("2_14hgw")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-3.05176e-05, -367.5)
+scale = Vector2(55, 36.75)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_n8v1t")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

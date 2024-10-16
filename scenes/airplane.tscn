@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://blevr4npb7jya"]
+
+[ext_resource type="Script" path="res://scripts/airplane.gd" id="1_xj8hc"]
+[ext_resource type="Texture2D" uid="uid://d3w6hfbouav7c" path="res://assets/airplane/airplane.png" id="2_fwe2u"]
+[ext_resource type="AudioStream" uid="uid://dn1v2u4c4rxxb" path="res://assets/sfx/airplane_take_damage.ogg" id="3_fmejs"]
+
+[node name="Airplane" type="Area2D"]
+z_index = 20
+collision_mask = 42
+script = ExtResource("1_xj8hc")
+movement_speed = 200.0
+glide_speed = 200.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("2_fwe2u")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(91, 17)
+polygon = PackedVector2Array(-5, -1, -21, -10, -34, -20, -53, -25, -143, -20, -164, -15, -163, 0, -148, 8, -116, 14, -38, 17, -18, 14, -5, 8)
+
+[node name="ShootTimer" type="Timer" parent="."]
+
+[node name="SuppliesTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(84, 20)
+
+[node name="SFX_AirplaneTakeDamage" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_fmejs")
+bus = &"sfx"
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(1, 14)
+emitting = false
+amount = 15
+one_shot = true
+explosiveness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(15, 15)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 500.0
+scale_amount_min = 1.9
+scale_amount_max = 41.03
+color = Color(0.851769, 0.851769, 0.851769, 1)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="SuppliesTimer" to="." method="_on_supplies_timer_timeout"]

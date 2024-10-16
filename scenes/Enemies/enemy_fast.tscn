@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccjaaju7icypb"]
+
+[ext_resource type="Script" path="res://scripts/enemies/enemy_fast.gd" id="1_1281a"]
+[ext_resource type="Texture2D" uid="uid://cbulajg2aojk6" path="res://assets/enemigos/enemy_fast.PNG" id="2_tiaey"]
+
+[node name="FastEnemy" type="Area2D"]
+collision_layer = 2
+collision_mask = 9
+script = ExtResource("1_1281a")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-228, 0)
+scale = Vector2(1.5, 1.5)
+polygon = PackedVector2Array(17, -17, 1, -2, 0, 10, 19, 23, 50, 33, 82, 37, 113, 37, 190, 35, 233, 27, 266, 16, 287, 13, 276, -21, 264, -15, 237, -16, 205, -16, 152, -27, 102, -35, 73, -34, 36, -25)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_tiaey")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." groups=["enemies"]]
+position = Vector2(0, 2.47209)
+scale = Vector2(-23.2385, 8.35893)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 15
+one_shot = true
+explosiveness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(15, 15)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 500.0
+scale_amount_min = 1.9
+scale_amount_max = 41.03
+color = Color(0.278431, 0.443137, 0.694118, 1)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
